@@ -7,7 +7,7 @@ char palabra[50];
 int i=0,flag=0,datollego=0,flag2=0,flagcomenzar=1;
 int flagop1=0,flagop2=0,flagop3=0,flagpalabra=0;
 int16 op1=0,op2=0,op3=0;
-int punteroOP;
+int punteroOP, operacion=0;
 int16 flagcontador1=0,flagcontador2=0,flagcontador3=0;
 int contador1=1,contador2=1,contador3=1,contador4=1;
 #INT_RDA
@@ -60,18 +60,12 @@ void main()
      if(contador3 ==256){
       contador3=1;
      }
-     output_d(contador1);
+     output_d(contador3);
      }
       if(datollego==1){
           datollego=0;
        if(caracter[i-1]>64 && caracter[i-1]<91  || caracter[i-1]>96 && caracter[i-1]<123  || caracter[i-1]=='<' 
        || caracter[i-1]=='>' || caracter[i-1]==13 || caracter[i-1] ==';'|| caracter[i-1]>47 && caracter[i-1]<58){
-       if(flag2==1){
-           if(caracter[i-1]==13){
-             printf("hola");
-             flagcomenzar=1;
-           }
-       }
       if(caracter[i-1]=='>'){
          flag=1;
          caracter[i-1]=NULL;
@@ -109,9 +103,10 @@ void main()
                caracter[i-1]=NULL;
                }
             }
-            if(flagpalabra=0){
+            if(flagpalabra=1){
                if(caracter[i-1] == 13){
-                
+                //No pude convertir la palabra asi que imprimere toda la cadena :(
+                operacion=1;
                }
             }
          if(caracter[i-1]=='<'){
@@ -127,6 +122,20 @@ void main()
            caracter[i-1]=NULL;
            i--;}
        }
+       if(operacion=1){
+         if((op1&0x80)==0x80&&(op2&0x80)==0x80&&(op3&0x80)==0x80){
+         printf("\n\r %s",caracter);}
+       }
+       if((op1&0x08)==0x80&&(op1&0x04)==0x04){
+         printf("\n\r %s",caracter);}
+       }
+       if((op2&0x10)==0x10&&(op2&0x10)==0x10&&(op2&0x01)==0x01){
+         printf("\n\r %s",caracter);}
+       }
+       if((op1&0x02)==0x02&&(op2&0x40)==0x40){
+         printf("\n\r %s",caracter);}
+       }
+       
       }
    }
 
