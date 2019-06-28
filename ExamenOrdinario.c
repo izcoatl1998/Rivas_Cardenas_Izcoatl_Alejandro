@@ -8,6 +8,7 @@ int i=0,flag=0,datollego=0,flag2=0,flagcomenzar=1;
 int flagop1=0,flagop2=0,flagop3=0,flagpalabra=0;
 int16 op1=0,op2=0,op3=0;
 int punteroOP;
+int16 flagcontador1=0,flagcontador2=0,flagcontador3=0;
 #INT_RDA
 void isr_serial(void){
    if(kbhit()){
@@ -28,6 +29,11 @@ void main()
    set_timer0(57);
    while(TRUE)
    { 
+     
+      
+      
+      
+      
       if(datollego==1){
           datollego=0;
        if(caracter[i-1]>64 && caracter[i-1]<91  || caracter[i-1]>96 && caracter[i-1]<123  || caracter[i-1]=='<' 
