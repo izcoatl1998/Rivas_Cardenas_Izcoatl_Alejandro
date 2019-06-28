@@ -9,6 +9,7 @@ int flagop1=0,flagop2=0,flagop3=0,flagpalabra=0;
 int16 op1=0,op2=0,op3=0;
 int punteroOP;
 int16 flagcontador1=0,flagcontador2=0,flagcontador3=0;
+int contador1=1,contador2=1,contador3=1,contador4=1;
 #INT_RDA
 void isr_serial(void){
    if(kbhit()){
@@ -19,6 +20,9 @@ void isr_serial(void){
 }
 #INT_TIMER0 
 void TIMER0(){
+flagcontador1++;
+flagcontador2++;
+flagcontador3++;
 set_timer0(57);
 }
 void main()
@@ -29,11 +33,35 @@ void main()
    set_timer0(57);
    while(TRUE)
    { 
-     
-      
-      
-      
-      
+     if(flagcontador1==100){
+     flagcontador1=0;}
+     else{
+        contador1*=2;   
+     if(contador1 ==256){
+      contador1=1;
+     }
+     output_a(contador1);
+     }
+     //--------------------------------
+     if(flagcontador2==300){
+     flagcontador2=0;}
+     else{
+        contador2*=2;   
+     if(contador2 ==256){
+      contador2=1;
+     }
+     output_b(contador2);
+     }
+     //--------------------------------------
+    if(flagcontador3==500){
+       flagcontador3=0;}
+     else{
+        contador3*=2;   
+     if(contador3 ==256){
+      contador3=1;
+     }
+     output_d(contador1);
+     }
       if(datollego==1){
           datollego=0;
        if(caracter[i-1]>64 && caracter[i-1]<91  || caracter[i-1]>96 && caracter[i-1]<123  || caracter[i-1]=='<' 
