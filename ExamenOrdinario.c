@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "calculos.h"
+void clean(void);
 char caracter[50];
 char palabra[50];
 int i=0,flag=0,datollego=0,flag2=0,flagcomenzar=1;
@@ -33,39 +34,11 @@ void main()
    set_timer0(57);
    while(TRUE)
    { 
-     if(flagcontador1==100){
-     flagcontador1=0;}
-     else{
-        contador1*=2;   
-     if(contador1 ==256){
-      contador1=1;
-     }
-     output_a(contador1);
-     }
-     //--------------------------------
-     if(flagcontador2==300){
-     flagcontador2=0;}
-     else{
-        contador2*=2;   
-     if(contador2 ==256){
-      contador2=1;
-     }
-     output_b(contador2);
-     }
-     //--------------------------------------
-    if(flagcontador3==500){
-       flagcontador3=0;}
-     else{
-        contador3*=2;   
-     if(contador3 ==256){
-      contador3=1;
-     }
-     output_d(contador3);
-     }
+
       if(datollego==1){
           datollego=0;
        if(caracter[i-1]>64 && caracter[i-1]<91  || caracter[i-1]>96 && caracter[i-1]<123  || caracter[i-1]=='<' 
-       || caracter[i-1]=='>' || caracter[i-1]==13 || caracter[i-1] ==';'|| caracter[i-1]>47 && caracter[i-1]<58){
+          || caracter[i-1]=='>' || caracter[i-1]==13 || caracter[i-1] ==';'|| caracter[i-1]>47 && caracter[i-1]<58){
       if(caracter[i-1]=='>'){
          flag=1;
          caracter[i-1]=NULL;
@@ -124,19 +97,54 @@ void main()
        }
        if(operacion=1){
          if((op1&0x80)==0x80&&(op2&0x80)==0x80&&(op3&0x80)==0x80){
-         printf("\n\r %s",caracter);}
-       }
+         printf("\n\r %s",caracter);
+         }
        if((op1&0x08)==0x80&&(op1&0x04)==0x04){
-         printf("\n\r %s",caracter);}
-       }
+            if(flagcontador1==100){
+              flagcontador1=0;}
+           else{
+             contador1*=2;   
+             if(contador1 ==256){
+               contador1=1;
+             }
+               output_a(contador1);
+              }
+         }
        if((op2&0x10)==0x10&&(op2&0x10)==0x10&&(op2&0x01)==0x01){
-         printf("\n\r %s",caracter);}
-       }
+            if(flagcontador2==300){
+              flagcontador2=0;}
+           else{
+             contador2*=2;   
+           if(contador2 ==256){
+             contador2=1;
+               }
+               output_b(contador2);
+             }
+          }       
        if((op1&0x02)==0x02&&(op2&0x40)==0x40){
-         printf("\n\r %s",caracter);}
+             if(flagcontador3==500){
+              flagcontador3=0;}
+             else{
+              contador3*=2;   
+              if(contador3 ==256){
+                contador3=1;
+            }
+        output_d(contador3);
+           }
+         }
+         //clean();
        }
-       
       }
    }
-
+ void clean(void){
+       for(int clear=0; clear<50;clear++){
+          if(caracter[clear]!=NULL){
+              caracter[clear]=NULL;
+         }
+      }
+        i=0,flag=0,datollego=0,flag2=0,flagcomenzar=1;
+        flagop1=0,flagop2=0,flagop3=0,flagpalabra=0;
+        op1=0,op2=0,op3=0;
+        punteroOP=0, operacion=0;
+   }
 
