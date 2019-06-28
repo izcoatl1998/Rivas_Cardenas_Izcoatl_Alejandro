@@ -1,8 +1,13 @@
 #include <interrupcionSerial.h>
 #include <stdio.h>
-char caracter[22];
+#include <stdlib.h>
+#include "calculos.h"
+char caracter[50];
+char palabra[50];
 int i=0,flag=0,datollego=0,flag2=0,flagcomenzar=1;
+int flagop1=0,flagop2=0,flagop3=0,flagpalabra=0;
 int16 op1=0,op2=0,op3=0;
+int punteroOP;
 #INT_RDA
 void isr_serial(void){
    if(kbhit()){
@@ -25,7 +30,8 @@ void main()
    { 
       if(datollego==1){
           datollego=0;
-       if(caracter[i-1]>64 && caracter[i-1]<91  || caracter[i-1]>96 && caracter[i-1]<123  || caracter[i-1]=='<' || caracter[i-1]=='>' || caracter[i-1]==13 || caracter[i-1] ==';'){ 
+       if(caracter[i-1]>64 && caracter[i-1]<91  || caracter[i-1]>96 && caracter[i-1]<123  || caracter[i-1]=='<' 
+       || caracter[i-1]=='>' || caracter[i-1]==13 || caracter[i-1] ==';'|| caracter[i-1]>47 && caracter[i-1]<58){
        if(flag2==1){
            if(caracter[i-1]==13){
              printf("hola");
@@ -35,8 +41,45 @@ void main()
       if(caracter[i-1]=='>'){
          flag=1;
          caracter[i-1]=NULL;
+         flagop1=1;
        }
       if(flag==1){
+         if(flagop1==1){
+           if(caracter[i-1] == ';'){
+              punteroOP=i;
+              op1=calcular1(caracter);
+              flagop1=0;
+              flagop2=1;
+              printf("%c",caracter[i-1]);
+              caracter[i-1]=NULL;}
+            }
+          if(flagop2==1){
+            if(caracter[i-1] == ';'){
+              op2=calcular2(caracter,punteroOp);
+              punteroOP=i;
+              flagop1=0;
+              flagop2=0;
+              flagop3=1;
+              printf("%c",caracter[i-1]);
+              caracter[i-1]=NULL;}
+            }
+           if(flagop3==1){
+             if(caracter[i-1] == ';'){
+               op3=calcular2(caracter,punteroOp);
+               punteroOP=i;
+               flagop1=0;
+               flagop2=0;
+               flagop3=0;
+               flagpalabra=1;
+               printf("%c",caracter[i-1]);
+               caracter[i-1]=NULL;
+               }
+            }
+            if(flagpalabra=0){
+               if(caracter[i-1] == 13){
+                
+               }
+            }
          if(caracter[i-1]=='<'){
            flag=0;
            flag2=1;
