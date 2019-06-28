@@ -10,11 +10,17 @@ void isr_serial(void){
     i++;
    }
 }
+#INT_TIMER0 
+void TIMER0(){
+set_timer0(57);
+}
 void main()
 {
    int j=i-1;
    enable_interrupts(INT_RDA);
    enable_interrupts(GLOBAL);
+   setup_timer_0(RTCC_INTERNAL | RTCC_DIV_32 );
+   set_timer0(57);
    while(TRUE)
    { 
       if(datollego==1){
