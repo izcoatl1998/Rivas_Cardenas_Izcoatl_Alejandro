@@ -1,7 +1,8 @@
 #include <interrupcionSerial.h>
 #include <stdio.h>
 char caracter[22];
-int i=0,flag=0,datollego=0,flag2=0;
+int i=0,flag=0,datollego=0,flag2=0,flagcomenzar=1;
+int16 op1=0,op2=0,op3=0;
 #INT_RDA
 void isr_serial(void){
    if(kbhit()){
@@ -16,7 +17,6 @@ set_timer0(57);
 }
 void main()
 {
-   int j=i-1;
    enable_interrupts(INT_RDA);
    enable_interrupts(GLOBAL);
    setup_timer_0(RTCC_INTERNAL | RTCC_DIV_32 );
@@ -24,13 +24,14 @@ void main()
    while(TRUE)
    { 
       if(datollego==1){
-        datollego=0;
+          datollego=0;
+       if(caracter[i-1]>64 && caracter[i-1]<90  || caracter[i-1]>97 && caracter[i-1]<122  || caracter[i-1]=='<' || caracter[i-1]=='>'){ 
        if(flag2==1){
            if(caracter[i-1]==13){
-             printf("hola");
+             flagcomenzar=1;
            }
        }
-      if(caracter[i-1]==60){
+      if(caracter[i-1]=='<'){
          flag=1;
          caracter[i-1]=NULL;
        }
@@ -44,9 +45,11 @@ void main()
         }
         else {
            i--;}
-        }
+        }else{
+           caracter[i-1]=NULL;
+           i--;}
+       }
       }
-
    }
 
 
