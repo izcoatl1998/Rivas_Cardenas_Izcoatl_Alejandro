@@ -25,18 +25,19 @@ void main()
    { 
       if(datollego==1){
           datollego=0;
-       if(caracter[i-1]>64 && caracter[i-1]<90  || caracter[i-1]>97 && caracter[i-1]<122  || caracter[i-1]=='<' || caracter[i-1]=='>'){ 
+       if(caracter[i-1]>64 && caracter[i-1]<91  || caracter[i-1]>96 && caracter[i-1]<123  || caracter[i-1]=='<' || caracter[i-1]=='>' || caracter[i-1]==13 || caracter[i-1] ==';'){ 
        if(flag2==1){
            if(caracter[i-1]==13){
+             printf("hola");
              flagcomenzar=1;
            }
        }
-      if(caracter[i-1]=='<'){
+      if(caracter[i-1]=='>'){
          flag=1;
          caracter[i-1]=NULL;
        }
       if(flag==1){
-         if(caracter[i-1]==62){
+         if(caracter[i-1]=='<'){
            flag=0;
            flag2=1;
            i++;
